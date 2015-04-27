@@ -2,16 +2,28 @@
 <html lang="en">
     <head>
         <title>ADFL</title>
+        <base href="/">
         <meta charset="UTF-8">
         <meta name=description content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
-        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="bower_components/drg-bootstrap/drg-bootstrap.css"/>
+        <link rel="stylesheet" href="app/components/home/home.css"/>
     </head>
-    <body>
-        <h1 class="text-center"></h1>
+    <body ng-app="adflApp">
+        <div class="main-view" ui-view=""></div>
 
-        <!-- Bootstrap JavaScript -->
+        <!-- vendor -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- private-->
+        <script src="app/app.module.js"></script>
+        <script src="app/components/home/home.controller.js"></script>
+        <script src="app/components/home/home.js"></script>
     </body>
 </html>

@@ -1,6 +1,5 @@
 .sidebar {
-  display: none;
-}
+  display: none; }
 
 @media (min-width: 768px) {
   .sidebar {
@@ -12,74 +11,61 @@
     display: block;
     padding: 20px;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
-    border-right: 1px solid #eee;
-  }
-}
-
+    border-right: 1px solid #eee; } }
 .container-fluid {
-  padding-top: 50px;
-}
+  padding-top: 50px; }
 
 .panel-title {
-  font-size: 25px;
-}
+  font-size: 25px; }
 
 i.fa.fa-star {
   font-size: 9px;
-  color: #69c8c7;
-}
+  color: #69c8c7; }
 
-.seeded-label{
-  margin-top: 20px;
-}
+.seeded-label {
+  margin-top: 20px; }
 
 .match {
   float: left;
   margin-right: 30px;
-  text-align: center;
-}
+  text-align: center; }
 
 .match h6 {
   display: inline-block;
   padding: 10px;
-  background: rgb(238, 238, 238);
+  background: #eeeeee;
   border-radius: 5px;
   text-align: center;
   width: 200px;
   color: #a2a2a2;
-  font-weight: normal;
-}
+  font-weight: normal; }
 
 .match h6.win {
   background-color: #69c8c7;
-  color: white;
-}
+  color: white; }
 
 .match h6.lose {
   background-color: #c8696a;
-  color: white;
-}
+  color: white; }
 
 .match h6.bye {
   background-color: #dddca1;
-  color: #6a6a6a;
-}
+  color: #6a6a6a; }
 
 .match h6.draw {
   background-color: #7c7c7c;
-  color: white;
-}
+  color: white; }
 
 .match h6 .home-score {
-  float: right;
-}
+  float: right; }
 
 .match h6 .away-score {
-  float: left;
-}
+  float: left; }
 
 .match span {
-  margin: 0 2px;
-}
+  margin: 0 2px; }
+
+/*# sourceMappingURL=home.css.map */

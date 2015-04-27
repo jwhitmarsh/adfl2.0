@@ -1,0 +1,144 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="close-icon">×</span>
+            <span class="icon-bar"></span>a
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand drg-logo" href="#">ADFL</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#">Admin</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li>
+                    <a href="">Table</a>
+                </li>
+                <li>
+                    <a href="">Team Info</a>
+                </li>
+                <li>
+                    <a href="">Fixtures</a>
+                </li>
+                <li ng-repeat="fixture in fixtures">
+                    <a href="">Week {{fixture.week}}
+                        <span class="small">(Deadline {{fixture.deadline}})</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-9 col-xs-offset-3 col-md-10 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">League Table</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Team</th>
+                                <th>Played</th>
+                                <th>Won</th>
+                                <th>Lost</th>
+                                <th>Drawn</th>
+                                <th>Points</th>
+                                <th>Scored</th>
+                                <th>Conceded</th>
+                                <th>Aggregate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="team in teams">
+                                <td>{{$index}}</td>
+                                <td>{{team.name}}</td>
+                                <td>{{team.played}}</td>
+                                <td>{{team.won}}</td>
+                                <td>{{team.lost}}</td>
+                                <td>{{team.drawn}}</td>
+                                <td>{{team.points}}</td>
+                                <td>{{team.scored}}</td>
+                                <td>{{team.conceeded}}</td>
+                                <td>{{team.aggregate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Team Info</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table" id="teamTable">
+                        <thead>
+                            <tr>
+                                <th>Team Name</th>
+                                <th>Player 1</th>
+                                <th>Player 2</th>
+                                <th>Form</th>
+                                <th>Next Opponent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="team in teams">
+                                <td>{{team.name}}<i ng-if="team.seeded" class="fa fa-star"></i></td>
+                                <td>{{team.p1}}</td>
+                                <td>{{team.p2}}</td>
+                                <td><span ng-repeat="form in team.form track by $index">{{form}}</span></td>
+                                <td>{{team.nextOpponent}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h6 class="seeded-label"><i class="fa fa-star"></i> seeded</h6>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Fixtures</h3>
+                </div>
+                <div class="panel-body">
+                    <h5 class="form-inline">Show only matches for
+                        <select class="form-control" ng-model="filteredTeam" ng-options="team as team.name for team in teams track by team.id">
+                            <option value="">All</option>
+                        </select>
+                        {{filteredTeam.name}}
+                    </h5>
+                    <div class="panel clearfix" ng-repeat="fixture in fixtures">
+                        <h3>Week {{fixture.week}}</h3>
+
+                        <div class="match" ng-repeat="match in fixture.matches"
+                             ng-if="filteredTeam === undefined || match.home.team === filteredTeam.name || match.away.team === filteredTeam.name">
+                            <h6 ng-class="{
+                            win: match.home.score > match.away.score,
+                            lose: match.home.score < match.away.score,
+                            draw: match.home.score !== null && match.home.score === match.away.score}">
+                                {{match.home.team}}
+                                <span class="home-score">{{match.home.score}}</span>
+                            </h6>
+                            <span>v</span>
+                            <h6 ng-class="{
+                            win: match.away.score > match.home.score,
+                            lose: match.away.score < match.home.score,
+                            draw: match.away.score !== null && match.away.score === match.home.score}">
+                                {{match.away.team}}
+                                <span class="away-score">{{match.away.score}}</span>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

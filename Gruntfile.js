@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 		},
 		watch: {
 			livereload: {
-				files: ['public/**/*.html', 'public/**/*.css', 'public/**/*.js']
+				files: ['client/**/*.html', 'client/**/*.css', 'client/**/*.js']
 			},
 			options: {
 				livereload: true
