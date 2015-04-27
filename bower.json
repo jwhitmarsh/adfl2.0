@@ -18,7 +18,6 @@
 		"bootstrap": "~3.3.4",
 		"jquery": "~2.1.3",
 		"angular-ui-router": "~0.2.13",
-		"font-awesome": "~4.3.0"
-	},
-	"directory": "/client/bower_components"
+		"font-awesome": "~4.3.0",
+	}
 }

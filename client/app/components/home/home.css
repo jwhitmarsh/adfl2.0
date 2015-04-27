@@ -68,4 +68,14 @@ i.fa.fa-star {
 .match span {
   margin: 0 2px; }
 
+.match.isEditMode h6 {
+  line-height: 30px; }
+
+.match h6 input {
+  width: 40px;
+  display: block;
+  text-align: center;
+  height: 30px;
+  line-height: inherit; }
+
 /*# sourceMappingURL=home.css.map */

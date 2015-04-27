@@ -6,12 +6,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand drg-logo" href="#">ADFL</a>
+        <a class="navbar-brand drg-logo" href="/">ADFL</a>
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="#">Admin</a>
+                <a href="/edit">Admin</a>
             </li>
         </ul>
     </div>
@@ -31,7 +31,7 @@
                 </li>
                 <li ng-repeat="fixture in fixtures">
                     <a href="">Week {{fixture.week}}
-                        <span class="small">(Deadline {{fixture.deadline}})</span>
+                        <span class="small">(Deadline {{fixture.deadline | date:'dd MMM'}})</span>
                     </a>
                 </li>
             </ul>
@@ -101,7 +101,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <h6 class="seeded-label"><i class="fa fa-star"></i> seeded</h6>
+                    <p class="seeded-label"><i class="fa fa-star"></i> seeded</p>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -109,31 +109,42 @@
                     <h3 class="panel-title">Fixtures</h3>
                 </div>
                 <div class="panel-body">
-                    <h5 class="form-inline">Show only matches for
+                    <p class="form-inline">Show only matches for
                         <select class="form-control" ng-model="filteredTeam" ng-options="team as team.name for team in teams track by team.id">
                             <option value="">All</option>
                         </select>
-                        {{filteredTeam.name}}
-                    </h5>
+                    </p>
                     <div class="panel clearfix" ng-repeat="fixture in fixtures">
-                        <h3>Week {{fixture.week}}</h3>
+                        <h3>Week {{fixture.week}}
+                            <button ng-if="isEditMode" class="btn btn-primary" ng-click="save(fixture)">Save</button>
+                        </h3>
 
-                        <div class="match" ng-repeat="match in fixture.matches"
+                        <div class="match"
+                             ng-class="{isEditMode : isEditMode}"
+                             ng-repeat="match in fixture.matches"
                              ng-if="filteredTeam === undefined || match.home.team === filteredTeam.name || match.away.team === filteredTeam.name">
-                            <h6 ng-class="{
+                            <h6 popover=""
+                                data-placement="top" data-toggle="popover" data-trigger="hover"
+                                data-content="{{getPlayers(match.home.team)}}"
+                                ng-class="{
                             win: match.home.score > match.away.score,
                             lose: match.home.score < match.away.score,
                             draw: match.home.score !== null && match.home.score === match.away.score}">
                                 {{match.home.team}}
-                                <span class="home-score">{{match.home.score}}</span>
+                                <span ng-if="!isEditMode" class="home-score">{{match.home.score}}</span>
+                                <input class="form-control home-score" type="text" ng-if="isEditMode" ng-model="match.home.score"/>
                             </h6>
                             <span>v</span>
-                            <h6 ng-class="{
+                            <h6 popover=""
+                                data-placement="top" data-toggle="popover" data-trigger="hover"
+                                data-content="{{getPlayers(match.away.team)}}"
+                                ng-class="{
                             win: match.away.score > match.home.score,
                             lose: match.away.score < match.home.score,
                             draw: match.away.score !== null && match.away.score === match.home.score}">
                                 {{match.away.team}}
-                                <span class="away-score">{{match.away.score}}</span>
+                                <span ng-if="!isEditMode" class="away-score">{{match.away.score}}</span>
+                                <input class="form-control away-score" type="text" ng-if="isEditMode" ng-model="match.away.score"/>
                             </h6>
                         </div>
                     </div>

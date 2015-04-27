@@ -1,9 +1,29 @@
 angular.module('adflApp')
-	.controller('HomeCtrl', function ($scope, $http, $q) {
-
+	.controller('HomeCtrl', function ($scope, $http, $q, isEditMode) {
+		console.log(isEditMode);
+		$scope.isEditMode = isEditMode;
 		$scope.fixtures = [];
 		$scope.teams = [];
 		$scope.tableData = [];
+
+		$scope.getPlayers = function (teamName) {
+			var team = $scope.teams.filter(function (x) {
+				return x.name === teamName;
+			});
+			if (team.length) {
+				return team[0].p1 + ' & ' + team[0].p2;
+			}
+		};
+
+		$scope.save = function (fixture) {
+			$http.put('/api/fixtures/' + fixture._id, fixture)
+				.success(function (res) {
+					console.log(res);
+				})
+				.error(function (e) {
+					console.error(e);
+				});
+		};
 
 		$q.all([
 			_getFixtures(),
@@ -14,9 +34,11 @@ angular.module('adflApp')
 
 		function _getFixtures() {
 			var d = $q.defer();
-			$http.get('app/shared/data/fixtures.json')
+			$http.get('/api/fixtures')
 				.success(function (data) {
-					$scope.fixtures = data;
+					$scope.fixtures = data.sort(function (a, b) {
+						return a.week - b.week;
+					});
 					d.resolve(true);
 				})
 				.error(function (e) {
@@ -28,7 +50,7 @@ angular.module('adflApp')
 
 		function _getTeams() {
 			var d = $q.defer();
-			$http.get('app/shared/data/teams.json')
+			$http.get('/api/teams')
 				.success(function (data) {
 					$scope.teams = data;
 					d.resolve(true);
