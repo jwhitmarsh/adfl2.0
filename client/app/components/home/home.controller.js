@@ -81,6 +81,7 @@ angular.module('adflApp')
 				team.aggregate = 0;
 				team.form = [];
 				team.nextOpponent = null;
+				team.doughnuts = 0;
 
 				for (var j = 0; j < teamFixtures.length; j++) {
 					var round = teamFixtures[j];
@@ -105,6 +106,10 @@ angular.module('adflApp')
 								team.won++;
 								team.points += 3;
 								team.form.push('W');
+
+								if (team.scored === 10 && team.conceeded === 0) {
+									team.doughnuts += 1;
+								}
 							}
 							else if (team.scored === team.conceeded) {
 								team.drawn++;

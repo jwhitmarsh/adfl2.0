@@ -55,20 +55,28 @@
                                 <th>Scored</th>
                                 <th>Conceded</th>
                                 <th>Aggregate</th>
+                                <th>Avg Scored</th>
+                                <th>Avg Conceded</th>
+                                <th>+/-</th>
+                                <th>Doughnuts!</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="team in teams">
-                                <td>{{$index}}</td>
+                                <td>{{$index +1}}</td>
                                 <td>{{team.name}}</td>
                                 <td>{{team.played}}</td>
                                 <td>{{team.won}}</td>
                                 <td>{{team.lost}}</td>
                                 <td>{{team.drawn}}</td>
                                 <td>{{team.points}}</td>
-                                <td>{{team.scored}}</td>
-                                <td>{{team.conceeded}}</td>
+                                <td>{{team.totalScored}}</td>
+                                <td>{{team.totalConceeded}}</td>
                                 <td>{{team.aggregate}}</td>
+                                <td>{{(team.totalScored/team.played) | number:1}}</td>
+                                <td>{{(team.totalConceeded/team.played) | number:1}}</td>
+                                <td>{{(team.totalScored/team.played) - (team.totalConceeded/team.played) | number:1}}</td>
+                                <td>{{team.doughnuts}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -129,7 +137,8 @@
                                 ng-class="{
                             win: match.home.score > match.away.score,
                             lose: match.home.score < match.away.score,
-                            draw: match.home.score !== null && match.home.score === match.away.score}">
+                            draw: match.home.score !== null && match.home.score === match.away.score,
+                            doughnut: match.home.score === 10 && match.away.score === 0}">
                                 {{match.home.team}}
                                 <span ng-if="!isEditMode" class="home-score">{{match.home.score}}</span>
                                 <input class="form-control home-score" type="text" ng-if="isEditMode" ng-model="match.home.score"/>
@@ -141,7 +150,8 @@
                                 ng-class="{
                             win: match.away.score > match.home.score,
                             lose: match.away.score < match.home.score,
-                            draw: match.away.score !== null && match.away.score === match.home.score}">
+                            draw: match.away.score !== null && match.away.score === match.home.score,
+                            doughnut: match.away.score === 10 && match.home.score === 0}">
                                 {{match.away.team}}
                                 <span ng-if="!isEditMode" class="away-score">{{match.away.score}}</span>
                                 <input class="form-control away-score" type="text" ng-if="isEditMode" ng-model="match.away.score"/>

@@ -47,6 +47,10 @@ i.fa.fa-star {
   background-color: #69c8c7;
   color: white; }
 
+.match h6.win.doughnut {
+  background-color: #AE72B0;
+  color: white; }
+
 .match h6.lose {
   background-color: #c8696a;
   color: white; }
