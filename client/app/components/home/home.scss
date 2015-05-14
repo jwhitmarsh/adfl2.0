@@ -1,3 +1,21 @@
+/*
+CONTENTS
+general
+sidebar
+league table
+matches
+*/
+
+//general
+.container-fluid {
+  padding-top: 50px;
+}
+
+.panel-title {
+  font-size: 25px;
+}
+
+//sidebar
 .sidebar {
   display: none;
 }
@@ -18,12 +36,15 @@
   }
 }
 
-.container-fluid {
-  padding-top: 50px;
-}
-
-.panel-title {
-  font-size: 25px;
+//league table
+.league-table {
+  thead {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;;
+  }
 }
 
 i.fa.fa-star {
@@ -35,10 +56,12 @@ i.fa.fa-star {
   margin-top: 20px;
 }
 
+//matches
 .match {
   float: left;
   margin-right: 30px;
   text-align: center;
+  cursor: default;
 }
 
 .match h6 {

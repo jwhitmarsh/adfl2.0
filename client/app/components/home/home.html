@@ -17,7 +17,12 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" ng-if="loading">
+        <div class="col-xs-12 text-center">
+            <h1><i class="fa fa-spinner fa-spin"></i></h1>
+        </div>
+    </div>
+    <div class="row" ng-if="loading === false">
         <div class="col-xs-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li>
@@ -42,28 +47,29 @@
                     <h3 class="panel-title">League Table</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table">
+                    <h6 class="small">Click a header to sort</h6>
+                    <table class="table league-table">
                         <thead>
                             <tr>
-                                <th>Position</th>
-                                <th>Team</th>
-                                <th>Played</th>
-                                <th>Won</th>
-                                <th>Lost</th>
-                                <th>Drawn</th>
-                                <th>Points</th>
-                                <th>Scored</th>
-                                <th>Conceded</th>
-                                <th>Aggregate</th>
-                                <th>Avg Scored</th>
-                                <th>Avg Conceded</th>
-                                <th>+/-</th>
-                                <th>Doughnuts!</th>
+                                <th ng-click="sortType = 'position'; sortReverse = !sortReverse">Position</th>
+                                <th ng-click="sortType = 'name'; sortReverse = !sortReverse">Team</th>
+                                <th ng-click="sortType = 'played'; sortReverse = !sortReverse">Played</th>
+                                <th ng-click="sortType = 'won'; sortReverse = !sortReverse">Won</th>
+                                <th ng-click="sortType = 'lost'; sortReverse = !sortReverse">Lost</th>
+                                <th ng-click="sortType = 'drawn'; sortReverse = !sortReverse">Drawn</th>
+                                <th ng-click="sortType = 'points'; sortReverse = !sortReverse">Points</th>
+                                <th ng-click="sortType = 'totalScored'; sortReverse = !sortReverse">Scored</th>
+                                <th ng-click="sortType = 'totalConceeded'; sortReverse = !sortReverse">Conceded</th>
+                                <th ng-click="sortType = 'aggregate'; sortReverse = !sortReverse">Aggregate</th>
+                                <th ng-click="sortType = 'totalScored/played'; sortReverse = !sortReverse">Avg Scored</th>
+                                <th ng-click="sortType = 'totalConceeded/played'; sortReverse = !sortReverse">Avg Conceded</th>
+                                <th ng-click="sortType = '(totalScored/played)-(totalConceeded/played)'; sortReverse = !sortReverse">+/-</th>
+                                <th ng-click="sortType = 'doughnuts'; sortReverse = !sortReverse">Doughnuts!</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="team in teams">
-                                <td>{{$index +1}}</td>
+                            <tr ng-repeat="team in teams | orderBy:sortType:sortReverse">
+                                <td>{{team.position}}</td>
                                 <td>{{team.name}}</td>
                                 <td>{{team.played}}</td>
                                 <td>{{team.won}}</td>
@@ -117,8 +123,11 @@
                     <h3 class="panel-title">Fixtures</h3>
                 </div>
                 <div class="panel-body">
+                    <h6 class="small">Click a team name to arrange your match</h6>
+
                     <p class="form-inline">Show only matches for
-                        <select class="form-control" ng-model="filteredTeam" ng-options="team as team.name for team in teams track by team.id">
+                        <select class="form-control" ng-model="filteredTeam"
+                                ng-options="team.name for team in teams | orderBy: 'name'">
                             <option value="">All</option>
                         </select>
                     </p>
@@ -130,10 +139,10 @@
                         <div class="match"
                              ng-class="{isEditMode : isEditMode}"
                              ng-repeat="match in fixture.matches"
-                             ng-if="filteredTeam === undefined || match.home.team === filteredTeam.name || match.away.team === filteredTeam.name">
+                             ng-if="filteredTeam === null || match.home.team === filteredTeam.name || match.away.team === filteredTeam.name">
                             <h6 popover=""
-                                data-placement="top" data-toggle="popover" data-trigger="hover"
-                                data-content="{{getPlayers(match.home.team)}}"
+                                data-placement="top" data-toggle="popover" data-trigger="click"
+                                data-content="{{getMatchPopover(match.home.team)}}" data-html="true"
                                 ng-class="{
                             win: match.home.score > match.away.score,
                             lose: match.home.score < match.away.score,
@@ -145,8 +154,8 @@
                             </h6>
                             <span>v</span>
                             <h6 popover=""
-                                data-placement="top" data-toggle="popover" data-trigger="hover"
-                                data-content="{{getPlayers(match.away.team)}}"
+                                data-placement="top" data-toggle="popover" data-trigger="click"
+                                data-content="{{getMatchPopover(match.away.team)}}" data-html="true"
                                 ng-class="{
                             win: match.away.score > match.home.score,
                             lose: match.away.score < match.home.score,

@@ -1,23 +1,35 @@
 angular.module('adflApp')
-	.controller('HomeCtrl', function ($scope, $http, $q, isEditMode) {
-		console.log(isEditMode);
+	.controller('HomeCtrl', function ($scope, $http, $q, isEditMode, $state) {
+		var controller = this;
+
+		$scope.loading = true;
 		$scope.isEditMode = isEditMode;
 		$scope.fixtures = [];
 		$scope.teams = [];
 		$scope.tableData = [];
 
-		$scope.getPlayers = function (teamName) {
+		$scope.filteredTeam = null;
+		$scope.sortType = 'position';
+		$scope.sortReverse = false;
+
+		$scope.getMatchPopover = function (teamName) {
 			var team = $scope.teams.filter(function (x) {
 				return x.name === teamName;
 			});
 			if (team.length) {
-				return team[0].p1 + ' & ' + team[0].p2;
+				team = team[0];
+				var p1Email = _getEmail(team.p1).toLowerCase(),
+					p2Email = _getEmail(team.p2).toLowerCase();
+
+				return '<p>' + team.p1 + ' & ' + team.p2 + '</p>' +
+					'<a href="mailto:' + p1Email + ',' + p2Email + '" ><i class="fa fa-envelope"></i> Request Match</a>';
 			}
 		};
 
 		$scope.save = function (fixture) {
 			$http.put('/api/fixtures/' + fixture._id, fixture)
 				.success(function (res) {
+					$state.go('view');
 					console.log(res);
 				})
 				.error(function (e) {
@@ -30,7 +42,12 @@ angular.module('adflApp')
 			_getTeams()
 		]).then(function () {
 			_setTableData();
+			$scope.loading = false;
 		});
+
+		function _getEmail(name) {
+			return name.substring(0, 1) + name.split(' ')[1].trim() + '@dresourcesgroup.com';
+		}
 
 		function _getFixtures() {
 			var d = $q.defer();
@@ -186,6 +203,14 @@ angular.module('adflApp')
 					return 1;
 				return 0;
 			});
+
+			for (var t = 0; t < $scope.teams.length; t++) {
+				$scope.teams[t].position = t + 1;
+			}
+		}
+
+		function _sortTeams() {
+
 		}
 
 

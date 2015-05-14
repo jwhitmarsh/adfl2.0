@@ -3,7 +3,8 @@ angular.module('adflApp')
 		return {
 			restrict: 'A',
 			link: function (scope, element, attrs) {
-				element.popover();
+				element.popover({
+				});
 			}
 		}
 	});

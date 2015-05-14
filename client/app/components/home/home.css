@@ -1,3 +1,16 @@
+/*
+CONTENTS
+general
+sidebar
+league table
+matches
+*/
+.container-fluid {
+  padding-top: 50px; }
+
+.panel-title {
+  font-size: 25px; }
+
 .sidebar {
   display: none; }
 
@@ -15,11 +28,12 @@
     /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
     border-right: 1px solid #eee; } }
-.container-fluid {
-  padding-top: 50px; }
-
-.panel-title {
-  font-size: 25px; }
+.league-table thead {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 
 i.fa.fa-star {
   font-size: 9px;
@@ -31,7 +45,8 @@ i.fa.fa-star {
 .match {
   float: left;
   margin-right: 30px;
-  text-align: center; }
+  text-align: center;
+  cursor: default; }
 
 .match h6 {
   display: inline-block;
