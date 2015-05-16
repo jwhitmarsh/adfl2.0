@@ -1,0 +1,139 @@
+/* ERROR MESSAGE */
+.message-container {
+  position: fixed;
+  top: 0;
+  color: white;
+  text-align: center;
+  z-index: 1000;
+  width: 100%;
+  cursor: pointer; }
+
+.message-container.success {
+  background: rgba(105, 200, 199, 0.7); }
+
+.message-container.success:hover {
+  background: rgba(105, 200, 199, 0.8); }
+
+.message-container.error {
+  background: rgba(169, 68, 66, 0.7); }
+
+.message-container.error:hover {
+  background: rgba(169, 68, 66, 0.8); }
+
+.message-container.loading {
+  background: rgba(66, 139, 202, 0.7); }
+
+.message-container.loading:hover {
+  background: rgba(66, 139, 202, 0.8); }
+
+.message-header {
+  font-size: 30px;
+  margin: 10px; }
+
+.message {
+  font-size: 20px;
+  margin: 0; }
+
+/*
+CONTENTS
+general
+sidebar
+league table
+matches
+*/
+.container-fluid {
+  padding-top: 50px; }
+
+.panel-title {
+  font-size: 25px; }
+
+.sidebar {
+  display: none; }
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee; } }
+.league-table thead {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+i.fa.fa-star {
+  font-size: 9px;
+  color: #69c8c7; }
+
+.seeded-label {
+  margin-top: 20px; }
+
+.match {
+  float: left;
+  margin-right: 30px;
+  text-align: center;
+  cursor: default; }
+
+.match h6 {
+  display: inline-block;
+  padding: 10px;
+  background: #eeeeee;
+  border-radius: 5px;
+  text-align: center;
+  width: 200px;
+  color: #a2a2a2;
+  font-weight: normal; }
+
+.match h6.win {
+  background-color: #69c8c7;
+  color: white; }
+
+.match h6.win.doughnut {
+  background-color: #AE72B0;
+  color: white; }
+
+.match h6.lose {
+  background-color: #c8696a;
+  color: white; }
+
+.match h6.bye {
+  background-color: #dddca1;
+  color: #6a6a6a; }
+
+.match h6.draw {
+  background-color: #7c7c7c;
+  color: white; }
+
+.match h6 .home-score {
+  float: right; }
+
+.match h6 .away-score {
+  float: left; }
+
+.match span {
+  margin: 0 2px; }
+
+.match.isEditMode h6 {
+  line-height: 30px; }
+
+.match h6 input {
+  width: 40px;
+  display: block;
+  text-align: center;
+  height: 30px;
+  line-height: inherit; }
+
+form .row {
+  margin-bottom: 10px; }
+
+/*# sourceMappingURL=app.css.map */

@@ -18,11 +18,8 @@ angular.module('adflApp')
 			});
 			if (team.length) {
 				team = team[0];
-				var p1Email = _getEmail(team.p1).toLowerCase(),
-					p2Email = _getEmail(team.p2).toLowerCase();
-
 				return '<p>' + team.p1 + ' & ' + team.p2 + '</p>' +
-					'<a href="mailto:' + p1Email + ',' + p2Email + '" ><i class="fa fa-envelope"></i> Request Match</a>';
+					'<a href="mailto:' + team.p1Email + ',' + team.p2Email + '" ><i class="fa fa-envelope"></i> Request Match</a>';
 			}
 		};
 
@@ -44,10 +41,6 @@ angular.module('adflApp')
 			_setTableData();
 			$scope.loading = false;
 		});
-
-		function _getEmail(name) {
-			return name.substring(0, 1) + name.split(' ')[1].trim() + '@dresourcesgroup.com';
-		}
 
 		function _getFixtures() {
 			var d = $q.defer();

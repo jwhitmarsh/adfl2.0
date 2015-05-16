@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="row" ng-if="loading === false">
-        <div class="col-xs-3 col-md-2 sidebar">
+        <div class="hidden-sm col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li>
                     <a href="">Table</a>
@@ -41,7 +41,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-xs-9 col-xs-offset-3 col-md-10 col-md-offset-2">
+        <div class="col-sm-12 col-md-10 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">League Table</h3>
@@ -51,20 +51,33 @@
                     <table class="table league-table">
                         <thead>
                             <tr>
-                                <th ng-click="sortType = 'position'; sortReverse = !sortReverse">Position</th>
+                                <th class="hidden-md" ng-click="sortType = 'position'; sortReverse = !sortReverse">Position</th>
+                                <th class="visible-md">Pos.</th>
                                 <th ng-click="sortType = 'name'; sortReverse = !sortReverse">Team</th>
-                                <th ng-click="sortType = 'played'; sortReverse = !sortReverse">Played</th>
-                                <th ng-click="sortType = 'won'; sortReverse = !sortReverse">Won</th>
-                                <th ng-click="sortType = 'lost'; sortReverse = !sortReverse">Lost</th>
-                                <th ng-click="sortType = 'drawn'; sortReverse = !sortReverse">Drawn</th>
-                                <th ng-click="sortType = 'points'; sortReverse = !sortReverse">Points</th>
-                                <th ng-click="sortType = 'totalScored'; sortReverse = !sortReverse">Scored</th>
-                                <th ng-click="sortType = 'totalConceeded'; sortReverse = !sortReverse">Conceded</th>
-                                <th ng-click="sortType = 'aggregate'; sortReverse = !sortReverse">Aggregate</th>
-                                <th ng-click="sortType = 'totalScored/played'; sortReverse = !sortReverse">Avg Scored</th>
-                                <th ng-click="sortType = 'totalConceeded/played'; sortReverse = !sortReverse">Avg Conceded</th>
-                                <th ng-click="sortType = '(totalScored/played)-(totalConceeded/played)'; sortReverse = !sortReverse">+/-</th>
-                                <th ng-click="sortType = 'doughnuts'; sortReverse = !sortReverse">Doughnuts!</th>
+                                <th class="hidden-md" ng-click="sortType = 'played'; sortReverse = !sortReverse">Played</th>
+                                <th class="visible-md">Pl</th>
+                                <th class="hidden-md" ng-click="sortType = 'won'; sortReverse = !sortReverse">Won</th>
+                                <th class="visible-md">W</th>
+                                <th class="hidden-md" ng-click="sortType = 'lost'; sortReverse = !sortReverse">Lost</th>
+                                <th class="visible-md">L</th>
+                                <th class="hidden-md" ng-click="sortType = 'drawn'; sortReverse = !sortReverse">Drawn</th>
+                                <th class="visible-md">D</th>
+                                <th class="hidden-md" ng-click="sortType = 'points'; sortReverse = !sortReverse">Points</th>
+                                <th class="visible-md">Pts</th>
+                                <th class="hidden-md" ng-click="sortType = 'totalScored'; sortReverse = !sortReverse">Scored</th>
+                                <th class="visible-md">S</th>
+                                <th class="hidden-md" ng-click="sortType = 'totalConceeded'; sortReverse = !sortReverse">Conceded</th>
+                                <th class="visible-md">C</th>
+                                <th class="hidden-md" ng-click="sortType = 'aggregate'; sortReverse = !sortReverse">Aggregate</th>
+                                <th class="visible-md">Agg</th>
+                                <th class="hidden-sm hidden-md" ng-click="sortType = 'totalScored/played'; sortReverse = !sortReverse">Avg Scored</th>
+                                <th class="hidden-sm hidden-md" ng-click="sortType = 'totalConceeded/played'; sortReverse = !sortReverse">Avg
+                                    Conceded
+                                </th>
+                                <th class="hidden-sm hidden-md"
+                                    ng-click="sortType = '(totalScored/played)-(totalConceeded/played)'; sortReverse = !sortReverse">+/-
+                                </th>
+                                <th class="hidden-sm hidden-md" ng-click="sortType = 'doughnuts'; sortReverse = !sortReverse">Doughnuts!</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,10 +92,10 @@
                                 <td>{{team.totalScored}}</td>
                                 <td>{{team.totalConceeded}}</td>
                                 <td>{{team.aggregate}}</td>
-                                <td>{{(team.totalScored/team.played) | number:1}}</td>
-                                <td>{{(team.totalConceeded/team.played) | number:1}}</td>
-                                <td>{{(team.totalScored/team.played) - (team.totalConceeded/team.played) | number:1}}</td>
-                                <td>{{team.doughnuts}}</td>
+                                <td class="hidden-sm hidden-md">{{(team.totalScored/team.played) | number:1}}</td>
+                                <td class="hidden-sm hidden-md">{{(team.totalConceeded/team.played) | number:1}}</td>
+                                <td class="hidden-sm hidden-md">{{(team.totalScored/team.played) - (team.totalConceeded/team.played) | number:1}}</td>
+                                <td class="hidden-sm hidden-md">{{team.doughnuts}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -98,6 +111,7 @@
                     <table class="table" id="teamTable">
                         <thead>
                             <tr>
+                                <th ng-if="isEditMode"></th>
                                 <th>Team Name</th>
                                 <th>Player 1</th>
                                 <th>Player 2</th>
@@ -106,7 +120,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="team in teams">
+                            <tr ng-repeat="team in teams | orderBy:'name'">
+                                <td ng-if="isEditMode">
+                                    <a href="/team/{{team._id}}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </td>
                                 <td>{{team.name}}<i ng-if="team.seeded" class="fa fa-star"></i></td>
                                 <td>{{team.p1}}</td>
                                 <td>{{team.p2}}</td>
@@ -123,7 +142,7 @@
                     <h3 class="panel-title">Fixtures</h3>
                 </div>
                 <div class="panel-body">
-                    <h6 class="small">Click a team name to arrange your match</h6>
+                    <!--<h6 class="small">Click a team name to arrange your match</h6>-->
 
                     <p class="form-inline">Show only matches for
                         <select class="form-control" ng-model="filteredTeam"

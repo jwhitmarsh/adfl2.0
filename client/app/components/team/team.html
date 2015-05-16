@@ -1,0 +1,70 @@
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="close-icon">×</span>
+            <span class="icon-bar"></span>a
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand drg-logo" href="/">ADFL</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/edit">Admin</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<site-message></site-message>
+<div class="container-fluid">
+    <ul class="breadcrumb">
+        <li><a href="/edit">Home</a><span class="divider"></span></li>
+    </ul>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form ng-submit="save()">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-floppy-o"></i>
+                        </button>
+                        <a href="/edit">
+                            <button class="btn btn-default pull-right">
+                                <i class="fa fa-arrow-left"></i><span> Back</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-6">
+                        <input type="text" class="form-control input-lg" ng-model="team.name" placeholder="team name"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-2">
+                        <input type="text" class="form-control input-md" ng-model="team.p1" placeholder="player one"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="text" class="form-control input md" ng-model="team.p1Email" placeholder="player one email"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-2">
+                        <input type="text" class="form-control input-md" ng-model="team.p2" placeholder="player two"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="text" class="form-control input md" ng-model="team.p2Email" placeholder="player two email"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <toggle-button ng-model="team.seeded" label="Seeded"></toggle-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

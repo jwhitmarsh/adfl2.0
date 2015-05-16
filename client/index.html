@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen">
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="bower_components/drg-bootstrap/drg-bootstrap.css"/>
-        <link rel="stylesheet" href="app/components/home/home.css"/>
+        <link rel="stylesheet" href="app/app.css"/>
     </head>
     <body ng-app="adflApp">
         <div class="main-view" ui-view=""></div>
@@ -23,8 +23,17 @@
 
         <!-- private-->
         <script src="app/app.module.js"></script>
+
+        <!-- directives -->
+        <script src="app/shared/directives/site-message/site-message.directive.js"></script>
+        <script src="app/shared/directives/site-message/site-message.service.js"></script>
         <script src="app/shared/directives/popover.js"></script>
+        <script src="app/shared/directives/toggle-button/toggle-button.js"></script>
+
+        <!-- components -->
         <script src="app/components/home/home.controller.js"></script>
         <script src="app/components/home/home.js"></script>
+        <script src="app/components/team/team.js"></script>
+        <script src="app/components/team/team.controller.js"></script>
     </body>
 </html>
