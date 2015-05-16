@@ -17,6 +17,9 @@ angular.module('adflApp')
 					isEditMode: function () {
 						return false;
 					}
+				},
+				data: {
+					requireLogin: false
 				}
 			})
 			.state('edit', {
@@ -27,6 +30,9 @@ angular.module('adflApp')
 					isEditMode: function () {
 						return true;
 					}
+				},
+				data: {
+					requireLogin: true // this property will apply to all children of 'app'
 				}
 			});
 	});

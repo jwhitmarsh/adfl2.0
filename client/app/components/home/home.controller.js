@@ -44,7 +44,7 @@ angular.module('adflApp')
 
 		function _getFixtures() {
 			var d = $q.defer();
-			$http.get('/api/fixtures')
+			$http.get('/api/fixtures', {cache: false})
 				.success(function (data) {
 					$scope.fixtures = data.sort(function (a, b) {
 						return a.week - b.week;
@@ -60,7 +60,7 @@ angular.module('adflApp')
 
 		function _getTeams() {
 			var d = $q.defer();
-			$http.get('/api/teams')
+			$http.get('/api/teams', {cache: false})
 				.success(function (data) {
 					$scope.teams = data;
 					d.resolve(true);

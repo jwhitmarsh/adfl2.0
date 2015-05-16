@@ -11,6 +11,9 @@ angular.module('adflApp')
 					team: function ($http, $stateParams) {
 						return $http.get('/api/teams/' + $stateParams.teamId);
 					}
+				},
+				data: {
+					requireLogin: true
 				}
 			})
 	});

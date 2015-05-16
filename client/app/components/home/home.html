@@ -159,7 +159,7 @@
                              ng-class="{isEditMode : isEditMode}"
                              ng-repeat="match in fixture.matches"
                              ng-if="filteredTeam === null || match.home.team === filteredTeam.name || match.away.team === filteredTeam.name">
-                            <h6 popover=""
+                            <h6 adfl-popover=""
                                 data-placement="top" data-toggle="popover" data-trigger="click"
                                 data-content="{{getMatchPopover(match.home.team)}}" data-html="true"
                                 ng-class="{
@@ -172,7 +172,7 @@
                                 <input class="form-control home-score" type="text" ng-if="isEditMode" ng-model="match.home.score"/>
                             </h6>
                             <span>v</span>
-                            <h6 popover=""
+                            <h6 adfl-popover=""
                                 data-placement="top" data-toggle="popover" data-trigger="click"
                                 data-content="{{getMatchPopover(match.away.team)}}" data-html="true"
                                 ng-class="{
