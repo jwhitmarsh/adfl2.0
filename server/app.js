@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.normalize(__dirname + '/../client')));
 app.use('/api/fixtures', require('./api/fixture'));
 app.use('/api/teams', require('./api/team'));
+app.use('/api/login', require('./api/login'));
 
 // All undefined asset or api routes should return a 404
 //app.route('/:url(api|auth|components|app|bower_components|assets)/*')

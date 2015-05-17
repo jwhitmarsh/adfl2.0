@@ -1,14 +1,18 @@
 angular.module('adflApp')
-	.controller('LoginModalCtrl', function ($scope) {
+	.controller('LoginModalCtrl', function ($scope, $http) {
 
 		this.cancel = $scope.$dismiss;
 
-		this.submit = function (email, password) {
-			$scope.$close(true);
-			//UsersApi.login(email, password)
-			//	.then(function (user) {
-			//
-			//	});
+		$scope.password = '';
+
+		this.submit = function () {
+			$http.post('/api/login', {password: $scope.password})
+				.success(function () {
+					$scope.$close(true);
+				})
+				.error(function () {
+					$scope.$close();
+				});
 		};
 
 	});
