@@ -1,0 +1,33 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="close-icon">×</span>
+            <span class="icon-bar"></span>a
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand drg-logo" href="/">ADFL</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/edit">Admin</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<site-message></site-message>
+<div class="container-fluid">
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a><span class="divider"></span></li>
+    </ul>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4>Submit Scores</h4>
+            <div class="match" ng-class="{isEditMode : isEditMode}" ng-repeat="match in matches">
+                <adfl-match match="match" is-edit-mode="isEditMode"></adfl-match>
+                <button class="btn btn-primary full-height"><i class="fa fa-floppy-o"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<h6 class="home">{{match.home.team}}
+    <span ng-if="!isEditMode" class="home-score">{{match.home.score}}</span>
+    <input class="form-control home-score" type="text" ng-if="isEditMode" ng-model="match.home.score"/>
+</h6>
+v
+<h6 class="away">{{match.away.team}}
+    <span ng-if="!isEditMode" class="away-score">{{match.away.score}}</span>
+    <input class="form-control away-score" type="text" ng-if="isEditMode" ng-model="match.away.score"/>
+</h6>

@@ -9,7 +9,7 @@ angular.module('adflApp')
 				controller: 'TeamCtrl',
 				resolve: {
 					team: function ($http, $stateParams) {
-						return $http.get('/api/teams/' + $stateParams.teamId);
+						return $http.get('/api/teams/' + $stateParams.teamId, {cache: false});
 					}
 				},
 				data: {
